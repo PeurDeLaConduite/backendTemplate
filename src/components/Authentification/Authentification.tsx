@@ -78,7 +78,7 @@ const formFields = {
             isRequired: true,
             order: 2,
         },
-        name: {
+        given_name: {
             label: "Prénom :",
             placeholder: "Entrez votre prénom",
             isRequired: true,
@@ -93,8 +93,8 @@ const formFields = {
         password: {
             label: "Mot de passe :",
             placeholder: "Créez un mot de passe",
-            order: 4,
             isRequired: true,
+            order: 4,
         },
         confirm_password: {
             label: "Confirmer le mot de passe :",
@@ -125,13 +125,6 @@ export default function Authentification({
 }) {
     return (
         <Authenticator
-            loginMechanisms={["email"]}
-            signUpAttributes={[
-                "name",
-                "family_name",
-                "phone_number",
-                "address",
-            ]}
             socialProviders={["google", "facebook", "apple"]}
             formFields={formFields}
         >
