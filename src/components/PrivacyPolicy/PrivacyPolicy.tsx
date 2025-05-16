@@ -36,7 +36,7 @@ const PrivacyPolicy = () => {
                     <li>
                         En cochant la case{" "}
                         <em>
-                            "J'ai lu et accepté les conditions d'utilisation"
+                            {`"J'ai lu et accepté les conditions d'utilisation"`}
                         </em>
                         , vous acceptez notre politique de confidentialité.
                     </li>
