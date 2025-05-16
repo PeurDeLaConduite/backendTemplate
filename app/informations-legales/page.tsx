@@ -7,7 +7,7 @@ export default async function Page() {
     return (
         <section className="section" id="s1">
             <div className="fixed-menu"></div>
-            <h2>informations-legales</h2>
+            <h2>Informations légales</h2>
             <div className="s1">
                 <PrivacyPolicy />
             </div>

@@ -15,8 +15,7 @@ const client = generateClient<Schema>();
 export default function ProfileForm() {
   const { user } = useAuthenticator((ctx) => [ctx.user]);
 
-  const [profile, setProfile] =
-    useState<Schema["UserProfile"]["type"] | null>(null);
+  const [profile, setProfile] = useState<Schema["UserProfile"]["type"] | null>(null);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -25,22 +24,21 @@ export default function ProfileForm() {
     phoneNumber: "",
   });
 
-  /* Charge le profil si l’utilisateur est déjà enregistré */
+  // Charge les données du profil de l'utilisateur connecté
   useEffect(() => {
     if (!user) return;
 
-    client.models.UserProfile.list({
-      filter: { email: { eq: user.signInDetails?.loginId ?? "" } },
-    }).then(({ data }) => {
-      const existing = data[0];
+    client.models.UserProfile.list().then((result) => {
+      const existing = result.data[0];
       if (existing) {
         setProfile(existing);
         setFormData({
-          firstName: existing.firstName,
-          familyName: existing.familyName,
-          address: existing.address ?? "",
-          phoneNumber: existing.phoneNumber ?? "",
-        });
+            firstName: existing.firstName ?? "",
+            familyName: existing.familyName ?? "",
+            address: existing.address ?? "",
+            phoneNumber: existing.phoneNumber ?? "",
+          });
+          
       }
     });
   }, [user]);
@@ -52,13 +50,12 @@ export default function ProfileForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const email = user?.signInDetails?.loginId ?? "";
 
     if (profile) {
       await client.models.UserProfile.update({ id: profile.id, ...formData });
       alert("Profil mis à jour !");
     } else {
-      await client.models.UserProfile.create({ email, ...formData });
+      await client.models.UserProfile.create({ ...formData });
       alert("Profil créé !");
     }
   };
@@ -68,7 +65,6 @@ export default function ProfileForm() {
       <h1 className="text-xl font-bold mb-4">Mon Profil</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* utilisez la même clé `name` que dans formData */}
         <input
           name="firstName"
           value={formData.firstName}

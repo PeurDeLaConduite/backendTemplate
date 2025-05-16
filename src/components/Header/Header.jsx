@@ -36,6 +36,12 @@ const Header = () => {
                     >
                         Blog
                     </Link>
+                    <Link
+                        href="/informations-legales"
+                        className="text-gray-700 hover:text-blue-600 font-medium transition"
+                    >
+                        Informations légales
+                    </Link>
                 </div>
             </nav>
         </header>

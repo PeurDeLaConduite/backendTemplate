@@ -1,0 +1,50 @@
+/* Conteneur principal */
+.pp_politique-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Titre principal */
+.pp_title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Titre des sections */
+.pp_section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Liste des éléments */
+.pp_list {
+    list-style-type: disc;
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+/* Style des paragraphes */
+.pp_politique-container  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* Surligner les éléments importants en gras */
+.pp_politique-container  strong {
+    font-weight: 700;
+}
+
+/* Italique pour certaines phrases */
+.pp_politique-container  em {
+    font-style: italic;
+}
