@@ -19,6 +19,12 @@ const Header = () => {
                         Upload Page
                     </Link>
                     <Link
+                        href="/profile"
+                        className="text-gray-700 hover:text-blue-600 font-medium transition"
+                    >
+                        My profile
+                    </Link>
+                    <Link
                         href="/"
                         className="text-gray-700 hover:text-blue-600 font-medium transition"
                     >

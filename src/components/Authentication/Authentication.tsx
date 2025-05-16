@@ -11,8 +11,8 @@ import { configureI18n, formFields } from "@/src/utils/amplifyUiConfig";
 Amplify.configure(outputs);
 configureI18n();
 
-export default function Authentification({
-    children,
+export default function Authentication({
+    children
 }: {
     children: React.ReactNode;
 }) {
