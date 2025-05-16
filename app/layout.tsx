@@ -9,7 +9,7 @@ import Header from "@/src/components/Header/Header";
 Amplify.configure(outputs);
 import "./globals.css";
 
-import { AuthProvider } from "@/src/components/auth-provider";
+import { AuthProvider } from "@/src/components/Authentication/auth-provider";
 
 export default function RootLayout({
     children
