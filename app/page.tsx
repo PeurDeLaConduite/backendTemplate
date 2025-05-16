@@ -10,7 +10,7 @@ Amplify.configure(outputs);
 export default function App() {
     return (
         <main>
-            <h1>Bienvenue sur l'application</h1>
+            <h1>Bienvenue sur l&apos;application</h1>
             <div>
                 🥳 App successfully hosted.
                 <br />
