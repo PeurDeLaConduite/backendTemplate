@@ -22,7 +22,14 @@ export const AuthIsConnected = ({ children }: { children: React.ReactNode }) => 
 
     const [firstName, setFirstName] = useState("");
     const [familyName, setFamilyName] = useState("");
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const globalLogout = (signOut?: () => void) => {
+        Cookies.remove("userProfile");
+        setIsLoggedIn(false);
+        setFirstName("");
+        setFamilyName("");
+        if (signOut) signOut(); // déconnexion Amplify
+    };
     const loadProfile = () => {
         const cookieProfile = Cookies.get("userProfile");
         if (cookieProfile) {
