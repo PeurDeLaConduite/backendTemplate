@@ -32,5 +32,5 @@ export const normalizeFormData = (data: Partial<MinimalProfile>) => ({
     firstName: data.firstName ?? "",
     familyName: data.familyName ?? "",
     address: data.address ?? "",
-    phoneNumber: data.phoneNumber ?? "",
-  });
+    phoneNumber: data.phoneNumber ?? ""
+});

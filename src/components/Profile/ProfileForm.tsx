@@ -1,3 +1,9 @@
+import {
+    SaveButton,
+    AddButton,
+    CancelButton
+} from "@/src/components/buttons/Buttons";
+
 type Props = {
     formData: {
         firstName: string;
@@ -24,53 +30,91 @@ export default function ProfileForm({
                 e.preventDefault();
                 handleSubmit();
             }}
-            className="space-y-3"
+            className="space-y-5 p-6 bg-white border rounded-md shadow-sm max-w-md mx-auto"
         >
-            <input
-                name="firstName"
-                placeholder="Prénom"
-                value={formData.firstName}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                required
-            />
-            <input
-                name="familyName"
-                placeholder="Nom"
-                value={formData.familyName}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                required
-            />
-            <input
-                name="address"
-                placeholder="Adresse"
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-            />
-            <input
-                name="phoneNumber"
-                placeholder="Téléphone"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-            />
-            <div className="flex gap-2">
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white px-3 py-1 rounded"
-                >
-                    {isEdit ? "Enregistrer" : "Créer"}
-                </button>
-                {isEdit && (
-                    <button
-                        type="button"
-                        onClick={onCancel}
-                        className="border px-3 py-1 rounded"
-                    >
-                        Annuler
-                    </button>
+            {/* Prénom */}
+            <div>
+                <label htmlFor="firstName" className="block mb-1 font-medium">
+                    Prénom
+                </label>
+                <input
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Prénom"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                    required
+                />
+            </div>
+
+            {/* Nom */}
+            <div>
+                <label htmlFor="familyName" className="block mb-1 font-medium">
+                    Nom
+                </label>
+                <input
+                    id="familyName"
+                    name="familyName"
+                    placeholder="Nom"
+                    value={formData.familyName}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                    required
+                />
+            </div>
+
+            {/* Adresse */}
+            <div>
+                <label htmlFor="address" className="block mb-1 font-medium">
+                    Adresse
+                </label>
+                <input
+                    id="address"
+                    name="address"
+                    placeholder="Adresse"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                />
+            </div>
+
+            {/* Téléphone */}
+            <div>
+                <label htmlFor="phoneNumber" className="block mb-1 font-medium">
+                    Téléphone
+                </label>
+                <input
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Téléphone"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                />
+            </div>
+
+            {/* Boutons */}
+            <div className="flex justify-end gap-2 pt-2">
+                {isEdit ? (
+                    <>
+                        <SaveButton
+                            onClick={handleSubmit}
+                            label="Enregistrer"
+                            className="min-w-[120px]"
+                        />
+                        <CancelButton
+                            onClick={onCancel}
+                            label="Annuler"
+                            className="min-w-[120px]"
+                        />
+                    </>
+                ) : (
+                    <AddButton
+                        onClick={handleSubmit}
+                        label="Créer"
+                        className="min-w-[120px]"
+                    />
                 )}
             </div>
         </form>
