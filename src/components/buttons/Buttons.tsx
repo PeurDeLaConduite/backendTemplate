@@ -9,7 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import type { SxProps, Theme } from "@mui/material";
 
 type ButtonProps = {
@@ -20,12 +20,7 @@ type ButtonProps = {
     color?: string;
 };
 
-export function EditButton({
-    onClick,
-    label,
-    className,
-    color, 
-}: ButtonProps) {
+export function EditButton({ onClick, label, className, color }: ButtonProps) {
     return (
         <ButtonBase
             label={label}
@@ -133,6 +128,20 @@ export function ClearFieldButton({ onClick, label, className }: ButtonProps) {
             color="warning"
             className={className}
             variant="outlined"
+        />
+    );
+}
+export function PowerButton({ onClick, label, className }: ButtonProps) {
+    return (
+        <ButtonBase
+            label={label}
+            title="Déconnexion"
+            onClick={onClick}
+            icon={<PowerSettingsNewIcon />}
+            color="error" // rouge pour indiquer la déconnexion
+            className={className}
+            variant="outlined"
+            sx={{ ...(deleteButtonStyles || {}) }}
         />
     );
 }

@@ -1,5 +1,5 @@
 "use client";
-
+import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/data";
@@ -36,8 +36,9 @@ export default function ProfileManager() {
             next: ({ items }) => {
                 const item = items[0] ?? null;
                 setProfile(item);
+
                 if (item && !editMode) {
-                    setFormData({
+                    const normalized = {
                         firstName: item.firstName ?? "",
                         familyName: item.familyName ?? "",
                         address: item.address ?? "",
@@ -45,6 +46,15 @@ export default function ProfileManager() {
                         city: item.city ?? "",
                         country: item.country ?? "",
                         phoneNumber: item.phoneNumber ?? "",
+                    };
+
+                    setFormData(normalized);
+
+                    // ✅ Enregistrement dans un cookie sécurisé
+                    Cookies.set("userProfile", JSON.stringify(normalized), {
+                        expires: 7, // 7 jours
+                        secure: true,
+                        sameSite: "Strict",
                     });
                 }
             },
@@ -96,7 +106,7 @@ export default function ProfileManager() {
     // ❌ Vider un champ
     const clearField = async (field: keyof typeof formData) => {
         if (!profile) return;
-        if (!confirm(`Supprimer le contenu du champ "${label(field)}" ?`)) return;
+        if (!confirm(`Supprimer le contenu du champ "${fieldLabel(field)}" ?`)) return;
         try {
             await client.models.UserProfile.update({
                 id: profile.id,
@@ -131,27 +141,11 @@ export default function ProfileManager() {
         }
     };
 
-    // 🔤 Label de champ (français)
-    const label = (field: string) => {
-        switch (field) {
-            case "firstName":
-                return "Prénom";
-            case "familyName":
-                return "Nom";
-            case "address":
-                return "Adresse";
-            case "phoneNumber":
-                return "Téléphone";
-            default:
-                return field;
-        }
-    };
-
     // 👤 Utilisateur non connecté
     if (!user) return null;
 
     return (
-        <section className="max-w-md mx-auto p-4 bg-white shadow-sm  rounded mb-6">
+        <section className="w-full max-w-md mx-auto px-4 py-6 sm:px-6 sm:py-8 bg-white shadow-sm rounded-lg mb-8">
             <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Mon profil</h1>
 
             {/* 👁️ Lecture seule */}

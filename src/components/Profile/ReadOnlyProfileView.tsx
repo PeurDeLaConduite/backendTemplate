@@ -20,11 +20,11 @@ export default function ReadOnlyProfileView({ profile, onEditField, onClearField
     const fields: (keyof MinimalProfile)[] = [
         "firstName",
         "familyName",
+        "phoneNumber",
         "address",
         "postalCode",
         "city",
         "country",
-        "phoneNumber",
     ];
 
     function getIcon(field: keyof MinimalProfile) {
@@ -35,6 +35,9 @@ export default function ReadOnlyProfileView({ profile, onEditField, onClearField
             case "familyName":
                 return <PersonIcon fontSize="small" className="text-gray-800" />;
             case "address":
+            case "postalCode":
+            case "city":
+            case "country":
                 return <HomeIcon fontSize="small" className="text-gray-800" />;
             default:
                 return null;
@@ -42,8 +45,10 @@ export default function ReadOnlyProfileView({ profile, onEditField, onClearField
     }
 
     return (
-        <div className="max-w-3xl mx-auto p-6 bg-violet-100 rounded-xl shadow-lg">
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">Gestion du profil</h2>
+        <div className="max-w-3xl mx-auto px-4 py-6 sm:px-6 sm:py-8 bg-violet-100 rounded-xl shadow-lg">
+            <h2 className="text-xl font-semibold text-gray-800 mb-6 text-left">
+                Gestion du profil
+            </h2>
 
             <div className="space-y-6">
                 {fields.map((field) => {
@@ -52,53 +57,55 @@ export default function ReadOnlyProfileView({ profile, onEditField, onClearField
                     return (
                         <div
                             key={field}
-                            className="bg-white rounded-lg shadow-md p-5 flex flex-col sm:flex-row sm:items-end justify-between"
+                            className="bg-white rounded-lg shadow-md px-4 py-5 sm:px-5 sm:py-4"
                         >
-                            <div className="mb-3 sm:mb-0 sm:flex-1">
+                            {/* Ligne du label et des actions */}
+                            <div className="flex items-center justify-between mb-0 sm:mb-2 ">
                                 <label
-                                    className="text-gray-800 font-semibold flex items-center gap-2 mb-2 select-none cursor-default"
+                                    className="text-gray-800 font-semibold flex items-center gap-2 select-none cursor-default"
                                     title={`Modifier ${label(field)}`}
                                 >
                                     {getIcon(field)}{" "}
                                     <span className="capitalize">{label(field)}</span>
                                 </label>
 
+                                <div className="flex gap-2">
+                                    <EditButton
+                                        onClick={() =>
+                                            onEditField({
+                                                field,
+                                                value: value || "",
+                                            })
+                                        }
+                                        className="!w-8 !h-8"
+                                        color="#1976d2"
+                                    />
+                                    {value && (
+                                        <DeleteButton
+                                            onClick={() => onClearField(field)}
+                                            className="!w-8 !h-8"
+                                        />
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Valeur ou message d’absence */}
+                            <div>
                                 {field === "phoneNumber" && value ? (
                                     <a
                                         href={`tel:${value}`}
-                                        className="text-base text-gray-900 hover:underline"
+                                        className="text-base text-gray-900 hover:underline break-all"
                                     >
                                         {formatPhoneNumber(value)}
                                     </a>
                                 ) : value ? (
-                                    <p className="text-base text-gray-900">{value}</p>
+                                    <p className="text-base text-gray-900 break-words">{value}</p>
                                 ) : (
                                     <p className="text-sm text-gray-400 italic font-light">
                                         {field === "phoneNumber"
                                             ? "Numéro non renseigné"
                                             : "Information non disponible"}
                                     </p>
-                                )}
-                            </div>
-
-                            <div className="flex gap-2 mt-3 sm:mt-0">
-                                <EditButton
-                                    onClick={() =>
-                                        onEditField({
-                                            field,
-                                            value: value || "",
-                                        })
-                                    }
-                                    className="!w-8 !h-8"
-                                    color="#1976d2"
-                                />
-                                {value && (
-                                    <span className="flex-center m-auto">
-                                        <DeleteButton
-                                            onClick={() => onClearField(field)}
-                                            className="!w-8 !h-8"
-                                        />
-                                    </span>
                                 )}
                             </div>
                         </div>

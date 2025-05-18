@@ -10,21 +10,20 @@ Amplify.configure(outputs);
 import "./globals.css";
 
 import { AuthProvider } from "@/src/components/Authentication/auth-provider";
+import { AuthIsConnected } from "@/src/context/AuthContext";
 
-export default function RootLayout({
-    children
-}: {
-    children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <body>
-                <Header />
-                <AuthProvider>
-                    <main className="min-h-screen bg-gray-100 p-8">
-                        {children}
-                    </main>
-                </AuthProvider>
+                <AuthIsConnected>
+                    <Header />
+                    <AuthProvider>
+                        <main className="min-h-screen bg-gray-100 px-4 py-6 sm:px-8 sm:py-10">
+                            {children}
+                        </main>
+                    </AuthProvider>
+                </AuthIsConnected>
             </body>
         </html>
     );
