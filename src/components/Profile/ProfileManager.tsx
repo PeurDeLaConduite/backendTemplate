@@ -10,7 +10,7 @@ import "@aws-amplify/ui-react/styles.css";
 import EditSingleField from "./EditSingleField";
 import ReadOnlyProfileView from "./ReadOnlyProfileView";
 import ProfileForm from "./ProfileForm";
-import { label as fieldLabel } from "./utilsProfile";
+import { label as fieldLabel, normalizeFormData } from "./utilsProfile";
 import { DeleteButton } from "@/src/components/buttons/Buttons";
 Amplify.configure(outputs);
 const client = generateClient<Schema>();
@@ -18,16 +18,9 @@ const client = generateClient<Schema>();
 export default function ProfileManager() {
     const { user } = useAuthenticator();
 
-    const [profile, setProfile] = useState<
-        Schema["UserProfile"]["type"] | null
-    >(null);
+    const [profile, setProfile] = useState<Schema["UserProfile"]["type"] | null>(null);
 
-    const [formData, setFormData] = useState({
-        firstName: "",
-        familyName: "",
-        address: "",
-        phoneNumber: ""
-    });
+    const [formData, setFormData] = useState(() => normalizeFormData({}));
 
     const [editMode, setEditMode] = useState(false);
     const [editModeField, setEditModeField] = useState<{
@@ -48,20 +41,21 @@ export default function ProfileManager() {
                         firstName: item.firstName ?? "",
                         familyName: item.familyName ?? "",
                         address: item.address ?? "",
-                        phoneNumber: item.phoneNumber ?? ""
+                        postalCode: item.postalCode ?? "",
+                        city: item.city ?? "",
+                        country: item.country ?? "",
+                        phoneNumber: item.phoneNumber ?? "",
                     });
                 }
-            }
+            },
         });
 
         return () => sub.unsubscribe();
     }, [user, editMode]);
 
     // 🔧 Gestion des champs de formulaire
-    const handleChange = ({
-        target: { name, value }
-    }: React.ChangeEvent<HTMLInputElement>) =>
-        setFormData(f => ({ ...f, [name]: value }));
+    const handleChange = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) =>
+        setFormData((f) => ({ ...f, [name]: value }));
 
     // 💾 Enregistrer (création ou édition globale)
     const saveProfile = async () => {
@@ -69,7 +63,7 @@ export default function ProfileManager() {
             if (profile) {
                 await client.models.UserProfile.update({
                     id: profile.id,
-                    ...formData
+                    ...formData,
                 });
                 alert("Profil mis à jour ✔");
             } else {
@@ -90,7 +84,7 @@ export default function ProfileManager() {
         try {
             await client.models.UserProfile.update({
                 id: profile.id,
-                [field]: value
+                [field]: value,
             });
             setEditModeField(null);
         } catch (err) {
@@ -102,12 +96,11 @@ export default function ProfileManager() {
     // ❌ Vider un champ
     const clearField = async (field: keyof typeof formData) => {
         if (!profile) return;
-        if (!confirm(`Supprimer le contenu du champ "${label(field)}" ?`))
-            return;
+        if (!confirm(`Supprimer le contenu du champ "${label(field)}" ?`)) return;
         try {
             await client.models.UserProfile.update({
                 id: profile.id,
-                [field]: ""
+                [field]: "",
             });
         } catch (err) {
             console.error(err);
@@ -126,7 +119,10 @@ export default function ProfileManager() {
                 firstName: "",
                 familyName: "",
                 address: "",
-                phoneNumber: ""
+                postalCode: "",
+                city: "",
+                country: "",
+                phoneNumber: "",
             });
             setEditMode(false);
         } catch (err) {
@@ -191,7 +187,10 @@ export default function ProfileManager() {
                             firstName: profile?.firstName ?? "",
                             familyName: profile?.familyName ?? "",
                             address: profile?.address ?? "",
-                            phoneNumber: profile?.phoneNumber ?? ""
+                            postalCode: profile?.postalCode ?? "",
+                            city: profile?.city ?? "",
+                            country: profile?.country ?? "",
+                            phoneNumber: profile?.phoneNumber ?? "",
                         });
                     }}
                 />
@@ -200,10 +199,7 @@ export default function ProfileManager() {
             {/* ❌ Supprimer le profil */}
             {profile && !editMode && !editModeField && (
                 <div className="flex items-center justify-center mt-4">
-                    <DeleteButton
-                        onClick={deleteProfile}
-                        label={"Supprimer le profil"}
-                    />
+                    <DeleteButton onClick={deleteProfile} label={"Supprimer le profil"} />
                 </div>
             )}
         </section>

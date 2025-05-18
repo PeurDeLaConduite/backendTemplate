@@ -1,14 +1,13 @@
-import {
-    SaveButton,
-    AddButton,
-    CancelButton
-} from "@/src/components/buttons/Buttons";
+import { SaveButton, AddButton, CancelButton } from "@/src/components/buttons/Buttons";
 
 type Props = {
     formData: {
         firstName: string;
         familyName: string;
         address: string;
+        postalCode: string;
+        city: string;
+        country: string;
         phoneNumber: string;
     };
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,11 +21,11 @@ export default function ProfileForm({
     handleChange,
     handleSubmit,
     isEdit,
-    onCancel
+    onCancel,
 }: Props) {
     return (
         <form
-            onSubmit={e => {
+            onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit();
             }}
@@ -79,6 +78,51 @@ export default function ProfileForm({
                 />
             </div>
 
+            {/* Code postal */}
+            <div>
+                <label htmlFor="postalCode" className="block mb-1 font-medium">
+                    Code postal
+                </label>
+                <input
+                    id="postalCode"
+                    name="postalCode"
+                    placeholder="75001"
+                    value={formData.postalCode}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                />
+            </div>
+
+            {/* Ville */}
+            <div>
+                <label htmlFor="city" className="block mb-1 font-medium">
+                    Ville
+                </label>
+                <input
+                    id="city"
+                    name="city"
+                    placeholder="Paris"
+                    value={formData.city}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                />
+            </div>
+
+            {/* Pays */}
+            <div>
+                <label htmlFor="country" className="block mb-1 font-medium">
+                    Pays
+                </label>
+                <input
+                    id="country"
+                    name="country"
+                    placeholder="France"
+                    value={formData.country}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                />
+            </div>
+
             {/* Téléphone */}
             <div>
                 <label htmlFor="phoneNumber" className="block mb-1 font-medium">
@@ -110,11 +154,7 @@ export default function ProfileForm({
                         />
                     </>
                 ) : (
-                    <AddButton
-                        onClick={handleSubmit}
-                        label="Créer"
-                        className="min-w-[120px]"
-                    />
+                    <AddButton onClick={handleSubmit} label="Créer" className="min-w-[120px]" />
                 )}
             </div>
         </form>

@@ -17,7 +17,15 @@ type Props = {
 };
 
 export default function ReadOnlyProfileView({ profile, onEditField, onClearField, label }: Props) {
-    const fields: (keyof MinimalProfile)[] = ["firstName", "familyName", "address", "phoneNumber"];
+    const fields: (keyof MinimalProfile)[] = [
+        "firstName",
+        "familyName",
+        "address",
+        "postalCode",
+        "city",
+        "country",
+        "phoneNumber",
+    ];
 
     function getIcon(field: keyof MinimalProfile) {
         switch (field) {
