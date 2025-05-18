@@ -9,12 +9,17 @@ type AuthContextType = {
     familyName: string;
     logout: () => void;
     refreshProfile: () => void;
+    globalLogout: (signOut?: () => void) => void;
+    signOutAmplify?: () => void;
+    setSignOutAmplify: (signOutFn: () => void) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthIsConnected = ({ children }: { children: React.ReactNode }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [signOutAmplify, setSignOutAmplify] = useState<() => void>();
+
     const [firstName, setFirstName] = useState("");
     const [familyName, setFamilyName] = useState("");
 
@@ -53,6 +58,16 @@ export const AuthIsConnected = ({ children }: { children: React.ReactNode }) => 
                 familyName,
                 logout,
                 refreshProfile: loadProfile,
+                globalLogout: (signOut?: () => void) => {
+                    Cookies.remove("userProfile");
+                    setIsLoggedIn(false);
+                    setFirstName("");
+                    setFamilyName("");
+                    if (signOut) signOut();
+                    else if (signOutAmplify) signOutAmplify(); // fallback global
+                },
+                signOutAmplify,
+                setSignOutAmplify,
             }}
         >
             {children}

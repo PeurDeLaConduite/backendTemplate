@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { useAuth } from "@/src/context/AuthContext";
 export default function UserProfileGuard({
     signOut,
     children,
@@ -10,6 +11,13 @@ export default function UserProfileGuard({
     signOut: () => void;
     children: React.ReactNode;
 }) {
+    // const { refreshProfile } = useAuth();
+    const { globalLogout } = useAuth();
+    // const handleLogout = () => {
+    //     Cookies.remove("userProfile");
+    //     signOut();
+    //     refreshProfile(); // met à jour le contexte Auth
+    // };
     const [firstName, setFirstName] = useState("");
     const [familyName, setFamilyName] = useState("");
     const [loading, setLoading] = useState(true);
@@ -19,7 +27,7 @@ export default function UserProfileGuard({
         const cookieProfile = Cookies.get("userProfile");
 
         if (!cookieProfile) {
-            router.push("/profile"); // Redirection vers la page profil
+            router.push("/profile");
             return;
         }
 
@@ -34,7 +42,13 @@ export default function UserProfileGuard({
         }
     }, [router]);
 
-    if (loading) return <p>Chargement du profil...</p>;
+    if (loading)
+        return (
+            <p>
+                Vous êtes connecté.
+                <br /> Chargement du profil en cours...
+            </p>
+        );
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900">
@@ -46,7 +60,7 @@ export default function UserProfileGuard({
                     </strong>
                 </p>
                 <button
-                    onClick={signOut}
+                    onClick={() => globalLogout(signOut)}
                     className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
                 >
                     Se déconnecter

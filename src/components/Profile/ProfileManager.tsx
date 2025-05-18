@@ -14,10 +14,10 @@ import { label as fieldLabel, normalizeFormData } from "./utilsProfile";
 import { DeleteButton } from "@/src/components/buttons/Buttons";
 Amplify.configure(outputs);
 const client = generateClient<Schema>();
-
+import { useAuth } from "@/src/context/AuthContext";
 export default function ProfileManager() {
     const { user } = useAuthenticator();
-
+    const { refreshProfile } = useAuth();
     const [profile, setProfile] = useState<Schema["UserProfile"]["type"] | null>(null);
 
     const [formData, setFormData] = useState(() => normalizeFormData({}));
@@ -29,6 +29,7 @@ export default function ProfileManager() {
     } | null>(null);
 
     // 🔁 Sync du profil temps-réel
+
     useEffect(() => {
         if (!user) return;
 
@@ -47,21 +48,23 @@ export default function ProfileManager() {
                         country: item.country ?? "",
                         phoneNumber: item.phoneNumber ?? "",
                     };
-
                     setFormData(normalized);
 
-                    // ✅ Enregistrement dans un cookie sécurisé
+                    // Mise à jour du cookie
                     Cookies.set("userProfile", JSON.stringify(normalized), {
-                        expires: 7, // 7 jours
+                        expires: 7,
                         secure: true,
                         sameSite: "Strict",
                     });
+
+                    // --- APPEL DU REFRESH ICI ---
+                    refreshProfile();
                 }
             },
         });
 
         return () => sub.unsubscribe();
-    }, [user, editMode]);
+    }, [user, editMode, refreshProfile]);
 
     // 🔧 Gestion des champs de formulaire
     const handleChange = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) =>

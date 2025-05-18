@@ -6,12 +6,15 @@ import { useAuth } from "@/src/context/AuthContext";
 import { PowerButton } from "../buttons/Buttons";
 
 const Header = () => {
-    const { isLoggedIn, firstName, familyName, logout } = useAuth();
+    const { isLoggedIn, firstName, familyName, globalLogout, signOutAmplify } = useAuth();
 
     return (
         <header className="bg-white shadow-md">
             <nav className="max-w-6xl mx-auto flex items-center justify-between p-4">
                 <div className="flex gap-6">
+                    <Link href="/connection" className="text-gray-700 hover:text-blue-600">
+                        Connection
+                    </Link>
                     <Link href="/" className="text-gray-700 hover:text-blue-600">
                         Home
                     </Link>
@@ -41,12 +44,14 @@ const Header = () => {
                                     {firstName} {familyName}
                                 </strong>
                             </p>
-                            <PowerButton
-                                onClick={logout}
-                                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
-                            >
-                                Se déconnecter
-                            </PowerButton>
+                            <Link href="/connection" className="text-gray-700 hover:text-blue-600">
+                                <PowerButton
+                                    onClick={() => globalLogout(signOutAmplify)}
+                                    className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                                >
+                                    Se déconnecter
+                                </PowerButton>
+                            </Link>
                         </>
                     ) : (
                         <Link href="/connection" className="text-gray-700 hover:text-blue-600">

@@ -1,9 +1,6 @@
 "use client";
 
-// import "./app.css";
-
 import { Amplify } from "aws-amplify";
-// import "@aws-amplify/ui-react/styles.css";
 import outputs from "../amplify_outputs.json";
 import Header from "@/src/components/Header/Header";
 Amplify.configure(outputs);
