@@ -1,15 +1,19 @@
+// components/buttons/Buttons.tsx
 import ButtonBase from "./ButtonBase";
 import { deleteButtonStyles, getEditButtonStyles } from "./buttonStyles";
 
-import SaveIcon from "@mui/icons-material/Save";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import CancelIcon from "@mui/icons-material/Cancel";
-import AddIcon from "@mui/icons-material/Add";
-import SendIcon from "@mui/icons-material/Send";
-import BackspaceIcon from "@mui/icons-material/Backspace";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import {
+    Save as SaveIcon,
+    Delete as DeleteIcon,
+    Edit as EditIcon,
+    Cancel as CancelIcon,
+    Add as AddIcon,
+    Send as SendIcon,
+    Backspace as BackspaceIcon,
+    ArrowBack as ArrowBackIcon,
+    PowerSettingsNew as PowerIcon,
+} from "@mui/icons-material";
+
 import type { SxProps, Theme } from "@mui/material";
 
 type ButtonProps = {
@@ -29,7 +33,7 @@ export function EditButton({ onClick, label, className, color }: ButtonProps) {
             icon={<EditIcon fontSize="small" />}
             className={className}
             variant="outlined"
-            sx={{ ...(getEditButtonStyles(color) || {}) }}
+            sx={getEditButtonStyles(color)}
         />
     );
 }
@@ -44,7 +48,7 @@ export function DeleteButton({ onClick, label, className }: ButtonProps) {
             color="error"
             className={className}
             variant="outlined"
-            sx={{ ...(deleteButtonStyles || {}) }}
+            sx={deleteButtonStyles}
         />
     );
 }
@@ -137,7 +141,7 @@ export function PowerButton({ onClick, label, className }: ButtonProps) {
             label={label}
             title="Déconnexion"
             onClick={onClick}
-            icon={<PowerSettingsNewIcon />}
+            icon={<PowerIcon />}
             color="error" // rouge pour indiquer la déconnexion
             className={className}
             variant="outlined"

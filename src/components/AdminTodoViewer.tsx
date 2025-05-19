@@ -12,9 +12,9 @@ type Todo = {
 async function fetchAdminTodoFile(fileName: string): Promise<Todo[] | null> {
     try {
         const result = await downloadData({
-            path: `admin-todos/${fileName}`,
+            path: `publique-storage/${fileName}`,
             options: {
-                bucket: "adminTodoStorage",
+                bucket: "PubliqueStorage",
             },
         }).result;
 

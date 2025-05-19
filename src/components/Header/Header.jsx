@@ -21,6 +21,9 @@ const Header = () => {
                     <Link href="/uploadPage" className="text-gray-700 hover:text-blue-600">
                         Upload Page
                     </Link>
+                    <Link href="/createBlog" className="text-gray-700 hover:text-blue-600">
+                        Create Blog
+                    </Link>
                     <Link href="/profile" className="text-gray-700 hover:text-blue-600">
                         My profile
                     </Link>

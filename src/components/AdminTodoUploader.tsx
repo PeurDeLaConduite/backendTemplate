@@ -14,17 +14,13 @@ export default function AdminTodoUploader() {
         const checkAdminGroup = async () => {
             try {
                 const session = await fetchAuthSession();
-                const groups =
-                    session.tokens?.idToken?.payload["cognito:groups"];
+                const groups = session.tokens?.idToken?.payload["cognito:groups"];
 
                 if (Array.isArray(groups) && groups.includes("ADMINS")) {
                     setIsAdmin(true);
                 }
             } catch (err) {
-                console.error(
-                    "Erreur lors de la vérification du groupe :",
-                    err
-                );
+                console.error("Erreur lors de la vérification du groupe :", err);
                 setIsAdmin(false);
             } finally {
                 setLoading(false);
@@ -47,10 +43,10 @@ export default function AdminTodoUploader() {
 
         try {
             await uploadData({
-                path: `admin-todos/${file.name}`,
+                path: `publique-storage/${file.name}`,
                 data: file,
                 options: {
-                    bucket: "adminTodoStorage",
+                    bucket: "PubliqueStorage",
                 },
             }).result;
 
@@ -63,9 +59,7 @@ export default function AdminTodoUploader() {
     };
 
     if (loading) {
-        return (
-            <p className="text-gray-600">Vérification des autorisations...</p>
-        );
+        return <p className="text-gray-600">Vérification des autorisations...</p>;
     }
 
     if (!isAdmin) {
@@ -78,9 +72,7 @@ export default function AdminTodoUploader() {
 
     return (
         <div className="bg-white shadow-md rounded-2xl p-6 max-w-lg mx-auto">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">
-                Uploader un AdminTodo
-            </h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Uploader un AdminTodo</h2>
             <input
                 type="file"
                 onChange={handleFileChange}

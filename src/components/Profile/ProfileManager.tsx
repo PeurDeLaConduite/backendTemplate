@@ -50,6 +50,15 @@ export default function ProfileManager() {
                     };
                     setFormData(normalized);
 
+                    // Mise à jour du cookie
+                    Cookies.set("userProfile", JSON.stringify(normalized), {
+                        expires: 7,
+                        secure: true,
+                        sameSite: "Strict",
+                    });
+
+                    /*
+
                     Cookies.set("userProfile", JSON.stringify(normalized), {
                         domain: ".peur-de-la-conduite.fr", 
                         path: "/",
@@ -58,6 +67,9 @@ export default function ProfileManager() {
                         expires: 7,
                     });
 
+                    */
+                   
+                    // --- APPEL DU REFRESH ICI ---
                     refreshProfile();
                 }
             },
