@@ -50,14 +50,14 @@ export default function ProfileManager() {
                     };
                     setFormData(normalized);
 
-                    // Mise à jour du cookie
                     Cookies.set("userProfile", JSON.stringify(normalized), {
-                        expires: 7,
+                        domain: ".peur-de-la-conduite.fr", 
+                        path: "/",
                         secure: true,
-                        sameSite: "Strict",
+                        sameSite: "None", 
+                        expires: 7,
                     });
 
-                    // --- APPEL DU REFRESH ICI ---
                     refreshProfile();
                 }
             },
@@ -195,7 +195,7 @@ export default function ProfileManager() {
 
             {/* ❌ Supprimer le profil */}
             {profile && !editMode && !editModeField && (
-                <div className="flex items-center justify-center mt-4">
+                <div className="flex items-center justify-center mt-8">
                     <DeleteButton onClick={deleteProfile} label={"Supprimer le profil"} />
                 </div>
             )}
