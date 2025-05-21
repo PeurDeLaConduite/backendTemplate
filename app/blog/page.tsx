@@ -1,7 +1,11 @@
-import React from "react";
-import Blog from "@/src/components/Blog/Blog";
-import blogData from "../../public/data.json";
+// app/blog/page.tsx
+
+import BlogClientWrapper from "./BlogClientWrapper";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+    title: "Blog",
+};
 
 export default function BlogPage() {
-    return <Blog data={blogData} />;
+    return <BlogClientWrapper />;
 }

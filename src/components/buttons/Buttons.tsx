@@ -1,5 +1,5 @@
 // components/buttons/Buttons.tsx
-import ButtonBase from "./ButtonBase";
+import ButtonBase, { ButtonBaseProps } from "./ButtonBase";
 import { deleteButtonStyles, getEditButtonStyles } from "./buttonStyles";
 
 import {
@@ -12,12 +12,14 @@ import {
     Backspace as BackspaceIcon,
     ArrowBack as ArrowBackIcon,
     PowerSettingsNew as PowerIcon,
+    Refresh as RefreshIcon,
 } from "@mui/icons-material";
 
 import type { SxProps, Theme } from "@mui/material";
-
+export type BackButtonProps = Pick<ButtonBaseProps, "href" | "label" | "className" | "sx">;
 type ButtonProps = {
     onClick: () => void;
+    href?: string;
     label?: string;
     className?: string;
     sx?: SxProps<Theme>;
@@ -53,16 +55,18 @@ export function DeleteButton({ onClick, label, className }: ButtonProps) {
     );
 }
 
-export function BackButton({ onClick, label, className }: ButtonProps) {
+export function BackButton({ href, onClick, label = "Retour", className, sx }: ButtonBaseProps) {
     return (
         <ButtonBase
+            href={href}
+            onClick={onClick}
             label={label}
             title="Retour"
-            onClick={onClick}
             icon={<ArrowBackIcon />}
             color="inherit"
             variant="contained"
             className={className}
+            sx={sx}
         />
     );
 }
@@ -146,6 +150,19 @@ export function PowerButton({ onClick, label, className }: ButtonProps) {
             className={className}
             variant="outlined"
             sx={{ ...(deleteButtonStyles || {}) }}
+        />
+    );
+}
+export function RefreshButton({ onClick, label, className }: ButtonProps) {
+    return (
+        <ButtonBase
+            label={label}
+            title="Rafraîchir la page"
+            onClick={onClick}
+            icon={<RefreshIcon />}
+            color="primary"
+            className={className}
+            variant="contained"
         />
     );
 }

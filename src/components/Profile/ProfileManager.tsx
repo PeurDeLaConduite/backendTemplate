@@ -68,7 +68,7 @@ export default function ProfileManager() {
                     });
 
                     */
-                   
+
                     // --- APPEL DU REFRESH ICI ---
                     refreshProfile();
                 }

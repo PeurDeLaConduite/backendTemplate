@@ -1,0 +1,68 @@
+{
+  "context": {
+    "project": "Interface de gestion d'articles de blog Next.js",
+    "storage": "Fichiers JSON stockés sur AWS S3 via Amplify",
+    "structure": {
+      "sections": [
+        {
+          "id": "string",
+          "title": "string",
+          "slug": "string",
+          "description": "string",
+          "order": "number",
+          "postIds": ["number"]
+        }
+      ],
+      "posts": [
+        {
+          "id": "number",
+          "title": "string",
+          "slug": "string",
+          "excerpt": "string",
+          "content": "string",
+          "authorId": "number",
+          "sectionIds": ["string"],
+          "relatedPostIds": ["number"],
+          "videoUrl": "string|null",
+          "tags": ["string"],
+          "type": "string",
+          "status": "string (draft|published|archived)",
+          "seo": {
+            "title": "string",
+            "description": "string",
+            "image": "string|null"
+          },
+          "createdAt": "ISODate string",
+          "updatedAt": "ISODate string"
+        }
+      ],
+      "authors": [
+        {
+          "id": "number",
+          "name": "string",
+          "bio": "string",
+          "email": "string"
+        }
+      ]
+    },
+    "features": [
+      "Gestion complète SEO par article",
+      "Articles liés entre eux par section via relatedPostIds",
+      "Section contient référence à ses articles (postIds) pour faciliter l'affichage",
+      "Stockage public des JSON, donc pas d'édition directe côté front (upload via interface admin)",
+      "Interface admin sur un sous-domaine distinct",
+      "Synchronisation des données JSON via téléchargement/upload depuis AWS S3",
+      "CRUD pour sections, articles et auteurs",
+      "Gestion des statuts des articles (draft, published, archived)",
+      "Gestion des tags directement dans les articles"
+    ],
+    "contraintes": [
+      "Le front ne doit pas modifier directement les fichiers JSON publics",
+      "Le backend ou interface admin doit gérer la mise à jour des fichiers",
+      "Sécurité et permissions sur l'upload et la modification via AWS Amplify",
+      "Les articles peuvent être liés à plusieurs sections",
+      "Les tags sont intégrés dans les articles (pas de gestion séparée des tags)"
+    ]
+  }
+}
+génère un fichier ou notes avec le contexte

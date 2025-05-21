@@ -1,57 +1,60 @@
-import { Button, IconButton, ButtonProps, SxProps, Theme } from "@mui/material";
-import { ReactNode } from "react";
+// src/components/buttons/ButtonBase.tsx
+import React from "react";
+import NextLink from "next/link";
+import { Button, IconButton, ButtonProps as MuiButtonProps, SxProps, Theme } from "@mui/material";
+import type { ReactNode } from "react";
 
-type ButtonBaseProps = {
+export type ButtonBaseProps = {
     label?: string;
     title?: string;
-    onClick: () => void;
+    onClick?: () => void;
+    href?: string;
     icon?: ReactNode;
-    color?: ButtonProps["color"];
-    variant?: ButtonProps["variant"];
+    color?: MuiButtonProps["color"];
+    variant?: MuiButtonProps["variant"];
     disabled?: boolean;
     className?: string;
     sx?: SxProps<Theme>;
-    size?: "small" | "medium" | "large";
+    size?: MuiButtonProps["size"];
 };
 
 export default function ButtonBase({
     label,
-    size = "small",
+    size = "medium",
     title,
     onClick,
+    href,
     icon,
     color = "primary",
     variant = "contained",
     disabled = false,
     className = "",
-    sx = {} // valeur par défaut
+    sx = {},
 }: ButtonBaseProps) {
+    // Propriétés communes
+    const common = { size, color, variant, disabled, className, sx, onClick };
+
+    // Cas “button avec label”
     if (label) {
-        return (
-            <Button
-                onClick={onClick}
-                size={size}
-                color={color}
-                variant={variant}
-                startIcon={icon}
-                disabled={disabled}
-                className={`!normal-case !rounded-xl !px-4 !py-2 ${className}`}
-                sx={sx} // <-- passer ici
-            >
+        // Si on a un href, on rend un MUI Button en tant que NextLink
+        return href ? (
+            <Button component={NextLink} href={href} {...common} startIcon={icon}>
+                {label}
+            </Button>
+        ) : (
+            <Button {...common} startIcon={icon}>
                 {label}
             </Button>
         );
     }
-    return (
-        <IconButton
-            onClick={onClick}
-            size={size}
-            color={color}
-            title={title}
-            disabled={disabled}
-            className={className}
-            sx={sx} // <-- passer ici
-        >
+
+    // Cas “icon only”
+    return href ? (
+        <IconButton component={NextLink} href={href} title={title} {...common}>
+            {icon}
+        </IconButton>
+    ) : (
+        <IconButton title={title} {...common}>
             {icon}
         </IconButton>
     );

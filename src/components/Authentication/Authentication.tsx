@@ -16,19 +16,20 @@ configureI18n();
 export default function Authentication({ children }: { children: React.ReactNode }) {
     return (
         <Authenticator formFields={formFields}>
-            {({ signOut, user }) =>
-                signOut && user ? (
+            {({ signOut, user }) => {
+                return signOut && user ? (
                     <AmplifySync signOut={signOut}>
                         <UserProfileGuard signOut={signOut}>{children}</UserProfileGuard>
                     </AmplifySync>
                 ) : (
                     <p>Chargement...</p>
-                )
-            }
+                );
+            }}
         </Authenticator>
     );
 }
 
+// Ce composant permet d'utiliser useEffect proprement
 function AmplifySync({ signOut, children }: { signOut: () => void; children: React.ReactNode }) {
     const { setSignOutAmplify } = useAuth();
 

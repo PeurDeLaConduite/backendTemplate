@@ -1,17 +1,22 @@
-"use client";
-
+// app/layout.tsx
+import "./globals.css";
+import type { Metadata } from "next";
 import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import Header from "@/src/components/Header/Header";
-Amplify.configure(outputs);
-import "./globals.css";
-
 import { AuthProvider } from "@/src/components/Authentication/auth-provider";
 import { AuthIsConnected } from "@/src/context/AuthContext";
 
+Amplify.configure(outputs);
+
+export const metadata: Metadata = {
+    title: { default: "Peur de la conduite", template: "%s | Peur de la conduite" },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="fr-FR">
+            <head />
             <body>
                 <AuthIsConnected>
                     <Header />

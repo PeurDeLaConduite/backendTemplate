@@ -1,9 +1,13 @@
-"use client";
+// "use client";
 
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import "./../app/app.css";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+    title: "Accueil | Peur de la conduite",
+};
 
 Amplify.configure(outputs);
 
