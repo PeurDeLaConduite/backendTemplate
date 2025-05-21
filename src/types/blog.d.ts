@@ -22,14 +22,19 @@ export interface Post {
     updatedAt: string;
 }
 
-export interface Section {
+export type Section = {
     id: string;
     title: string;
     slug: string;
     description: string;
     order: number;
     postIds: number[];
-}
+    seo?: {
+        title: string;
+        description: string;
+        image?: string;
+    };
+};
 
 export interface BlogData {
     sections: Section[];

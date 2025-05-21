@@ -1,33 +1,19 @@
 // app/blog/[slug]/page.tsx
-import { readFileSync } from "fs";
-import { join } from "path";
+import { fetchBlogData } from "@utils/fetchData";
 import type { Metadata, ResolvingMetadata } from "next";
 import Blog from "@components/Blog/Blog";
-import type { Section, Post, Author } from "@src/types/blog";
+import { BackButton } from "@/src/components/buttons/Buttons";
 type Props = {
     params: Promise<{ slug: string }>;
     searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
+import { loadData } from "@utils/loadData";
 
-// 1) Chargement statique du JSON
-function loadData() {
-    const file = join(process.cwd(), "public", "data.json");
-    const raw = readFileSync(file, "utf-8");
-    return JSON.parse(raw) as {
-        sections: Section[];
-        posts: Post[];
-        authors: Author[];
-    };
-}
 
-// 2) Génération des chemins statiques
 export async function generateStaticParams() {
-    const { posts } = loadData();
+    const { posts } = await fetchBlogData();
     return posts.map((p) => ({ slug: p.slug }));
 }
-
-// 3) Metadata — `params` est une Promise
-
 export async function generateMetadata(
     { params }: Props,
     parent: ResolvingMetadata
@@ -36,7 +22,7 @@ export async function generateMetadata(
     const { slug } = await params;
 
     // 2) chargez vos données
-    const { posts } = loadData();
+    const { posts } = await loadData();
     const post = posts.find((p) => p.slug === slug)!;
 
     // 3) vous pouvez étendre le metadata parent si besoin
@@ -55,8 +41,18 @@ export async function generateMetadata(
 // 4) Page component — `params` est une Promise
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const { sections, posts, authors } = loadData();
+
+    // ❗️ ici aussi tu avais oublié `await`
+    const { sections, posts, authors } = await loadData();
+
     const post = posts.find((p) => p.slug === slug)!;
 
-    return <Blog data={{ sections, posts, authors }} singlePost={post} />;
+    return (
+        <>
+            <Blog data={{ sections, posts, authors }} singlePost={post} />{" "}
+            <div className="text-right mb-6">
+                <BackButton href="/blog" label="Retour" className="inline-block" />
+            </div>
+        </>
+    );
 }

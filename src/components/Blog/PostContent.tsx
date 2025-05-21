@@ -2,7 +2,7 @@
 import React from "react";
 import VideoEmbed from "./VideoEmbed";
 import { Post, Author } from "@src/types/blog";
-import { BackButton } from "@/src/components/buttons/Buttons";
+
 
 type PostContentProps = {
     post: Post & { content: string };
@@ -12,9 +12,7 @@ type PostContentProps = {
 const PostContent: React.FC<PostContentProps> = ({ post, author }) => (
     <>
         {/* ↩ Lien de retour : pas de onClick, c'est du Server Component */}
-        <div className="max-w-5xl mx-auto px-4 py-4">
-            <BackButton href={"/blog"} label="Retour au blog" className="inline-block" />
-        </div>
+
 
         <article className="prose lg:prose-xl mx-auto py-8">
             <h1>{post.title}</h1>
