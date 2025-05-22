@@ -40,6 +40,6 @@
         "src/**/*.tsx",
         "public/**/*.json",
         ".next/types/**/*.ts"
-    ],
+, "src/components/Blog/Create/components/EditableField.jsx", "src/hooks/useEditableForm.js"    ],
     "exclude": ["node_modules", "amplify"]
 }

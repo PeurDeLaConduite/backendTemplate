@@ -46,3 +46,8 @@ export interface BlogProps {
     data: BlogData;
     singlePost?: Post; // optionnel pour page article
 }
+export type Seo = {
+    title: string;
+    description: string;
+    image: string;
+};

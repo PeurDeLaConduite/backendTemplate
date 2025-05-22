@@ -1,94 +1,143 @@
-import { useState } from "react";
+// SectionsForm.jsx
+import EditableField from "./components/EditableField";
+import SeoFields from "./components/SeoFields";
+import FormActionButtons from "./FormActionButtons";
+import useEditableForm from "@hooks/useEditableForm";
+import OrderSelector from "./components/OrderSelector";
+import ItemSelector from "./components/ItemSelector";
 
-export default function SectionsForm({ sections, setSections }) {
-    const [form, setForm] = useState({ id: "", title: "", slug: "", description: "", order: 1 });
-    const [editingIndex, setEditingIndex] = useState(null);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (editingIndex !== null) {
-            const updated = [...sections];
-            updated[editingIndex] = form;
-            setSections(updated);
-        } else {
-            setSections([...sections, form]);
-        }
-        setForm({ id: "", title: "", slug: "", description: "", order: 1 });
-        setEditingIndex(null);
+export default function SectionsForm({ sections, setSections, posts, setPosts }) {
+    const initialForm = {
+        id: "",
+        title: "",
+        slug: "",
+        description: "",
+        order: 1,
+        postIds: [],
+        seo: { title: "", description: "", image: "" },
     };
 
-    const handleEdit = (index) => {
-        setForm(sections[index]);
-        setEditingIndex(index);
-    };
+    const {
+        form,
+        editingIndex,
+        isEditing,
+        handleChange,
+        handleSave,
+        handleEdit,
+        handleCancel,
+        handleDelete,
+        handleReorder,
+        setForm,
+        handlePostsChange,
+    } = useEditableForm({
+        initialForm,
+        items: sections,
+        setItems: setSections,
+        relatedItems: posts,
+        setRelatedItems: setPosts,
+        itemKey: "id",
+        relatedKey: "sectionIds",
+        relationKey: "postIds",
+        prepareItem: (item) => ({
+            ...item,
+            postIds: Array.isArray(item.postIds)
+                ? item.postIds
+                : item.postIds.split(",").map(Number),
+            order: Number(item.order),
+        }),
+    });
 
-    const handleDelete = (index) => {
-        const updated = [...sections];
-        updated.splice(index, 1);
-        setSections(updated);
-    };
+    // const handlePostIdsChange = (newPostIds) => {
+    //     setForm((prev) => ({ ...prev, postIds: newPostIds }));
+
+    //     // Mettre à jour les articles (liaison bidirectionnelle)
+    //     const updatedPosts = posts.map((post) => {
+    //         if (newPostIds.includes(post.id)) {
+    //             if (!post.sectionIds.includes(form.id)) {
+    //                 return { ...post, sectionIds: [...post.sectionIds, form.id] };
+    //             }
+    //         } else {
+    //             return { ...post, sectionIds: post.sectionIds.filter((id) => id !== form.id) };
+    //         }
+    //         return post;
+    //     });
+    //     setPosts(updatedPosts);
+    // };
 
     return (
         <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Sections</h2>
-            <form onSubmit={handleSubmit} className="grid gap-2">
-                <input
-                    type="text"
-                    placeholder="ID"
-                    value={form.id}
-                    onChange={(e) => setForm({ ...form, id: e.target.value })}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Titre"
+            <h2 className="text-xl font-semibold mb-4">Sections</h2>
+            <form onSubmit={(e) => e.preventDefault()} className="grid gap-2">
+                <EditableField name="id" label="ID" value={form.id} onChange={handleChange} />
+                <EditableField
+                    name="title"
+                    label="Titre"
                     value={form.title}
-                    onChange={(e) => setForm({ ...form, title: e.target.value })}
-                    required
+                    onChange={handleChange}
                 />
-                <input
-                    type="text"
-                    placeholder="Slug"
-                    value={form.slug}
-                    onChange={(e) => setForm({ ...form, slug: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Description"
+                <EditableField name="slug" label="Slug" value={form.slug} onChange={handleChange} />
+                <EditableField
+                    name="description"
+                    label="Description"
                     value={form.description}
-                    onChange={(e) => setForm({ ...form, description: e.target.value })}
+                    onChange={handleChange}
                 />
-                <input
-                    type="number"
-                    placeholder="Ordre"
+                <OrderSelector
+                    sections={sections}
+                    currentIndex={editingIndex === null ? sections.length : editingIndex}
                     value={form.order}
-                    onChange={(e) => setForm({ ...form, order: Number(e.target.value) })}
+                    onReorder={handleReorder}
                 />
-                <button type="submit" className="bg-green-500 text-white py-1 rounded">
-                    {editingIndex !== null ? "Modifier" : "Ajouter"}
-                </button>
+                <SeoFields seo={form.seo} readOnly={!isEditing} onChange={handleChange} />
+
+                {/* <PostSelector
+                    posts={posts || []}
+                    selectedPostIds={form.postIds}
+                    onChange={handlePostsChange}
+                /> */}
+                <ItemSelector
+                    items={posts || []}
+                    selectedIds={form.postIds}
+                    onChange={handlePostsChange}
+                    label="Articles associés :"
+                />
+                {editingIndex === null && (
+                    <button
+                        type="button"
+                        onClick={handleSave}
+                        className="bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition"
+                    >
+                        Ajouter la section
+                    </button>
+                )}
             </form>
-            <ul className="mt-4">
+
+            <ul className="mt-6 space-y-2">
                 {sections
                     .sort((a, b) => a.order - b.order)
-                    .map((section, index) => (
-                        <li key={index} className="flex justify-between items-center py-1 border-b">
-                            <span>
-                                {section.title} (ordre: {section.order})
-                            </span>
-                            <div className="space-x-2">
-                                <button onClick={() => handleEdit(index)} className="text-blue-500">
-                                    Modifier
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(index)}
-                                    className="text-red-500"
-                                >
-                                    Supprimer
-                                </button>
-                            </div>
-                        </li>
-                    ))}
+                    .map((section, idx) => {
+                        const isEditing = editingIndex === idx;
+                        return (
+                            <li
+                                key={section.id || idx}
+                                className={`flex justify-between items-center p-2 transition-colors duration-300 ${
+                                    isEditing ? "bg-yellow-100" : "border-b"
+                                }`}
+                            >
+                                <div>
+                                    <strong>{section.title}</strong> (ordre : {section.order})
+                                </div>
+                                <FormActionButtons
+                                    editingIndex={editingIndex}
+                                    currentIndex={idx}
+                                    onEdit={() => handleEdit(idx)}
+                                    onSave={handleSave}
+                                    onCancel={handleCancel}
+                                    onDelete={() => handleDelete(idx)}
+                                />
+                            </li>
+                        );
+                    })}
             </ul>
         </div>
     );

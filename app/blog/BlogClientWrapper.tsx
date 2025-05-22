@@ -10,7 +10,7 @@ function InnerBlog() {
 
     if (loading) return <p>Chargement…</p>;
     if (error) return <p>Erreur : {error.message}</p>;
-
+    console.log(data);
     return (
         <div className="max-w-5xl mx-auto px-4 py-8">
             {/* On passe noWrapper pour éviter un deuxième conteneur */}

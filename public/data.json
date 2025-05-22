@@ -1,104 +1,122 @@
-// {
-//     "sections": [
-//         {
-//             "id": "react",
-//             "title": "React & Frontend",
-//             "slug": "react-frontend",
-//             "description": "Articles dédiés au développement front-end avec React.",
-//             "order": 1,
-//             "postIds": [1, 2],
-//             "seo": {
-//                 "title": "React & Frontend — Articles techniques",
-//                 "description": "Explorez tous nos articles dédiés au développement front-end moderne avec React.",
-//                 "image": "https://monblog.com/images/sections/react.jpg"
-//             }
-//         },
-//         {
-//             "id": "general",
-//             "title": "Articles Généraux",
-//             "slug": "articles-generaux",
-//             "description": "Divers sujets autour du développement web.",
-//             "order": 2,
-//             "postIds": [3]
-//         }
-//     ],
-//     "posts": [
-//         {
-//             "id": 1,
-//             "title": "Hooks avancés en React",
-//             "slug": "hooks-avances-en-react",
-//             "excerpt": "useReducer, useMemo, et comment optimiser vos composants React...",
-//             "content": "Contenu complet sur l’utilisation avancée des hooks React...",
-//             "authorId": 2,
-//             "sectionIds": ["react"],
-//             "relatedPostIds": [2],
-//             "videoUrl": "https://www.youtube.com/watch?v=6dE0a8nHHNA&list=PL-SO5LH7DFHt8RpfbVJ6MujaZHDooUQVH&index=6",
-//             "tags": ["react", "hooks", "optimisation"],
-//             "type": "tutoriel",
-//             "status": "published",
-//             "seo": {
-//                 "title": "Hooks avancés avec React",
-//                 "description": "Apprenez à utiliser useReducer, useMemo et d'autres hooks avancés.",
-//                 "image": "https://monblog.com/images/hooks.png"
-//             },
-//             "createdAt": "2025-05-10T15:30:00Z",
-//             "updatedAt": "2025-05-10T15:30:00Z"
-//         },
-//         {
-//             "id": 2,
-//             "title": "Utiliser React Router",
-//             "slug": "utiliser-react-router",
-//             "excerpt": "Un guide pour gérer la navigation dans vos applications React.",
-//             "content": "Explication détaillée de React Router et ses fonctionnalités.",
-//             "authorId": 2,
-//             "sectionIds": ["react"],
-//             "relatedPostIds": [1],
-//             "videoUrl": null,
-//             "tags": ["react", "router"],
-//             "type": "tutoriel",
-//             "status": "published",
-//             "seo": {
-//                 "title": "React Router simplifié",
-//                 "description": "Maîtrisez la navigation avec React Router.",
-//                 "image": null
-//             },
-//             "createdAt": "2025-05-08T09:00:00Z",
-//             "updatedAt": "2025-05-08T09:00:00Z"
-//         },
-//         {
-//             "id": 3,
-//             "title": "Bienvenue sur le blog",
-//             "slug": "bienvenue-sur-le-blog",
-//             "excerpt": "Découvrez nos articles et tutoriels pour développeurs.",
-//             "content": "Présentation de la mission du blog et de ses thématiques.",
-//             "authorId": 1,
-//             "sectionIds": ["general"],
-//             "relatedPostIds": [],
-//             "videoUrl": null,
-//             "tags": ["introduction", "blog"],
-//             "type": "annonce",
-//             "status": "published",
-//             "seo": {
-//                 "title": "Bienvenue sur le blog",
-//                 "description": "Un blog pour les passionnés de développement web.",
-//                 "image": null
-//             },
-//             "createdAt": "2025-05-01T08:00:00Z",
-//             "updatedAt": "2025-05-01T08:00:00Z"
-//         }
-//     ],
-//     "authors": [
-//         {
-//             "id": 1,
-//             "name": "Alice Dupont",
-//             "bio": "Développeuse web passionnée de front-end.",
-//             "email": "alice@example.com"
-//         },
-//         {
-//             "id": 2,
-//             "name": "Marc Lemoine",
-//             "bio": "Spécialiste React et formateur JavaScript.",
-//             "email": "marc@example.com"
-//         }
-//     ]
-// }
+{
+    "sections": [
+        {
+            "id": "react",
+            "title": "React & Frontend",
+            "slug": "react-frontend",
+            "description": "Articles dédiés au développement front-end avec React.",
+            "order": 1,
+            "postIds": [1, 2],
+            "seo": {
+                "title": "React & Frontend — Articles techniques",
+                "description": "Explorez tous nos articles dédiés au développement front-end moderne avec React.",
+                "image": "https://monblog.com/images/sections/react.jpg"
+            }
+        },
+        {
+            "id": "general",
+            "title": "Articles Généraux",
+            "slug": "articles-generaux",
+            "description": "Divers sujets autour du développement web.",
+            "order": 2,
+            "postIds": [3],
+            "seo": {
+                "title": "Articles Généraux — Blog Développement Web",
+                "description": "Découvrez nos articles couvrant un large éventail de sujets autour du développement web.",
+                "image": "https://monblog.com/images/sections/articles-generaux.jpg"
+            }
+        },
+        {
+            "id": "divers",
+            "title": "Articles divers",
+            "slug": "articles-divers",
+            "description": "Sujets divers autour de divers sujets.",
+            "order": 3,
+            "postIds": [3],
+            "seo": {
+                "title": "Articles Divers — Ressources & Inspirations",
+                "description": "Parcourez nos articles divers pour trouver des idées et des ressources variées autour du web.",
+                "image": "https://monblog.com/images/sections/articles-divers.jpg"
+            }
+        }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "title": "Hooks avancés en React",
+            "slug": "hooks-avances-en-react",
+            "excerpt": "useReducer, useMemo, et comment optimiser vos composants React...",
+            "content": "Contenu complet sur l’utilisation avancée des hooks React...",
+            "authorId": 2,
+            "sectionIds": ["react"],
+            "relatedPostIds": [2],
+            "videoUrl": "https://www.youtube.com/watch?v=6dE0a8nHHNA&list=PL-SO5LH7DFHt8RpfbVJ6MujaZHDooUQVH&index=6",
+            "tags": ["react", "hooks", "optimisation"],
+            "type": "tutoriel",
+            "status": "published",
+            "seo": {
+                "title": "Hooks avancés avec React",
+                "description": "Apprenez à utiliser useReducer, useMemo et d'autres hooks avancés.",
+                "image": "https://monblog.com/images/hooks.png"
+            },
+            "createdAt": "2025-05-10T15:30:00Z",
+            "updatedAt": "2025-05-10T15:30:00Z"
+        },
+        {
+            "id": 2,
+            "title": "Utiliser React Router",
+            "slug": "utiliser-react-router",
+            "excerpt": "Un guide pour gérer la navigation dans vos applications React.",
+            "content": "Explication détaillée de React Router et ses fonctionnalités.",
+            "authorId": 2,
+            "sectionIds": ["react"],
+            "relatedPostIds": [1],
+            "videoUrl": null,
+            "tags": ["react", "router"],
+            "type": "tutoriel",
+            "status": "published",
+            "seo": {
+                "title": "React Router simplifié",
+                "description": "Maîtrisez la navigation avec React Router.",
+                "image": null
+            },
+            "createdAt": "2025-05-08T09:00:00Z",
+            "updatedAt": "2025-05-08T09:00:00Z"
+        },
+        {
+            "id": 3,
+            "title": "Bienvenue sur le blog",
+            "slug": "bienvenue-sur-le-blog",
+            "excerpt": "Découvrez nos articles et tutoriels pour développeurs.",
+            "content": "Présentation de la mission du blog et de ses thématiques.",
+            "authorId": 1,
+            "sectionIds": ["general", "divers"],
+            "relatedPostIds": [],
+            "videoUrl": null,
+            "tags": ["introduction", "blog"],
+            "type": "annonce",
+            "status": "published",
+            "seo": {
+                "title": "Bienvenue sur le blog",
+                "description": "Un blog pour les passionnés de développement web.",
+                "image": null
+            },
+            "createdAt": "2025-05-01T08:00:00Z",
+            "updatedAt": "2025-05-01T08:00:00Z"
+        }
+    ],
+    "authors": [
+        {
+            "id": 1,
+            "name": "Alice Dupont",
+            "bio": "Développeuse web passionnée de front-end.",
+            "email": "alice@example.com"
+        },
+        {
+            "id": 2,
+            "name": "Marc Lemoine",
+            "bio": "Spécialiste React et formateur JavaScript.",
+            "email": "marc@example.com"
+        }
+    ]
+}

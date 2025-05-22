@@ -20,13 +20,13 @@ export const getEditButtonStyles = (color: string = "blue"): SxProps<Theme> => (
 
 export const editButtonStyles: SxProps<Theme> = {
     ...commonButtonStyles,
-    border: "1px solid blue",
-    color: "blue",
+    border: "1px solid #1976d2",
+    color: "#1976d2",
     "&:hover": {
-        bgcolor: "blue",
-        color: "white",
-        border: "1px solid blue",
-        "& svg": { color: "white" },
+        bgcolor: "#1976d2",
+        color: "#ffffff",
+        border: "1px solid #1976d2",
+        "& svg": { color: "#ffffff" },
     },
 };
 
