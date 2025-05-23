@@ -8,7 +8,7 @@ const EditableTextArea = ({ label, value, onChange, readOnly, name }) => (
         <textarea
             id={name}
             name={name}
-            value={value}
+            value={value ?? ""}
             onChange={onChange}
             readOnly={readOnly}
             style={{

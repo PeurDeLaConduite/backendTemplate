@@ -1,18 +1,18 @@
 export interface Author {
-    id: number;
+    id: string;
     name: string;
     // autres champs si nécessaire
 }
 
 export interface Post {
-    id: number;
+    id: string;
     title: string;
     slug: string;
     excerpt: string;
     content: string;
-    authorId: number;
+    authorId: string;
     sectionIds: string[];
-    relatedPostIds: number[];
+    relatedPostIds: string[];
     videoUrl: string | null;
     tags: string[];
     type: string;
@@ -28,7 +28,7 @@ export type Section = {
     slug: string;
     description: string;
     order: number;
-    postIds: number[];
+    postIds: string[];
     seo?: {
         title: string;
         description: string;

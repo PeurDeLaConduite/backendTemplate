@@ -7,7 +7,7 @@ const EditableField = ({ label, value, onChange, readOnly, name }) => (
             <input
                 type="text"
                 name={name}
-                value={value}
+                value={value ?? ""}
                 onChange={onChange}
                 readOnly={readOnly}
                 style={{

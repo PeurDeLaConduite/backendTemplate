@@ -89,7 +89,7 @@ export default function CreateBlog() {
                 posts={posts} // 👈 bien transmettre les posts ici
                 setPosts={setPosts} // 👈 ainsi que setPosts
             />
-            <PostsForm posts={posts} setPosts={setPosts} sections={sections} />
+            <PostsForm posts={posts} setPosts={setPosts} sections={sections} authors={authors} />
             <AuthorsForm authors={authors} setAuthors={setAuthors} />
 
             <div className="flex flex-col items-start gap-4">

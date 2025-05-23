@@ -1,12 +1,12 @@
 {
     "sections": [
         {
-            "id": "react",
+            "id": "S1",
             "title": "React & Frontend",
             "slug": "react-frontend",
             "description": "Articles dédiés au développement front-end avec React.",
             "order": 1,
-            "postIds": [1, 2],
+            "postIds": ["P1", "P2"],
             "seo": {
                 "title": "React & Frontend — Articles techniques",
                 "description": "Explorez tous nos articles dédiés au développement front-end moderne avec React.",
@@ -14,12 +14,12 @@
             }
         },
         {
-            "id": "general",
+            "id": "S2",
             "title": "Articles Généraux",
             "slug": "articles-generaux",
             "description": "Divers sujets autour du développement web.",
             "order": 2,
-            "postIds": [3],
+            "postIds": ["P3"],
             "seo": {
                 "title": "Articles Généraux — Blog Développement Web",
                 "description": "Découvrez nos articles couvrant un large éventail de sujets autour du développement web.",
@@ -27,12 +27,12 @@
             }
         },
         {
-            "id": "divers",
+            "id": "S3",
             "title": "Articles divers",
             "slug": "articles-divers",
             "description": "Sujets divers autour de divers sujets.",
             "order": 3,
-            "postIds": [3],
+            "postIds": ["P3"],
             "seo": {
                 "title": "Articles Divers — Ressources & Inspirations",
                 "description": "Parcourez nos articles divers pour trouver des idées et des ressources variées autour du web.",
@@ -42,15 +42,15 @@
     ],
     "posts": [
         {
-            "id": 1,
+            "id": "P1",
             "title": "Hooks avancés en React",
             "slug": "hooks-avances-en-react",
             "excerpt": "useReducer, useMemo, et comment optimiser vos composants React...",
             "content": "Contenu complet sur l’utilisation avancée des hooks React...",
-            "authorId": 2,
-            "sectionIds": ["react"],
-            "relatedPostIds": [2],
-            "videoUrl": "https://www.youtube.com/watch?v=6dE0a8nHHNA&list=PL-SO5LH7DFHt8RpfbVJ6MujaZHDooUQVH&index=6",
+            "authorId": "A2",
+            "sectionIds": ["S1"],
+            "relatedPostIds": ["P2"],
+            "videoUrl": "https://www.youtube.com/watch?v=6dE0a8nHHNA&…",
             "tags": ["react", "hooks", "optimisation"],
             "type": "tutoriel",
             "status": "published",
@@ -63,14 +63,14 @@
             "updatedAt": "2025-05-10T15:30:00Z"
         },
         {
-            "id": 2,
+            "id": "P2",
             "title": "Utiliser React Router",
             "slug": "utiliser-react-router",
             "excerpt": "Un guide pour gérer la navigation dans vos applications React.",
             "content": "Explication détaillée de React Router et ses fonctionnalités.",
-            "authorId": 2,
-            "sectionIds": ["react"],
-            "relatedPostIds": [1],
+            "authorId": "A2",
+            "sectionIds": ["S1"],
+            "relatedPostIds": ["P1"],
             "videoUrl": null,
             "tags": ["react", "router"],
             "type": "tutoriel",
@@ -84,13 +84,13 @@
             "updatedAt": "2025-05-08T09:00:00Z"
         },
         {
-            "id": 3,
+            "id": "P3",
             "title": "Bienvenue sur le blog",
             "slug": "bienvenue-sur-le-blog",
             "excerpt": "Découvrez nos articles et tutoriels pour développeurs.",
             "content": "Présentation de la mission du blog et de ses thématiques.",
-            "authorId": 1,
-            "sectionIds": ["general", "divers"],
+            "authorId": "A1",
+            "sectionIds": ["S2", "S3"],
             "relatedPostIds": [],
             "videoUrl": null,
             "tags": ["introduction", "blog"],
@@ -107,13 +107,13 @@
     ],
     "authors": [
         {
-            "id": 1,
+            "id": "A1",
             "name": "Alice Dupont",
             "bio": "Développeuse web passionnée de front-end.",
             "email": "alice@example.com"
         },
         {
-            "id": 2,
+            "id": "A2",
             "name": "Marc Lemoine",
             "bio": "Spécialiste React et formateur JavaScript.",
             "email": "marc@example.com"
