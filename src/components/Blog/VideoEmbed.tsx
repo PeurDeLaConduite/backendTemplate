@@ -65,6 +65,7 @@ const VideoEmbed: React.FC<Props> = ({ url, title }) => {
                 className="tiktok-embed max-w-[605px] min-w-[325px]"
                 cite={url}
                 data-video-id={tkId}
+                style={{ maxWidth: "605px", minWidth: "325px" }}
             >
                 <section>Chargement de la vidéo TikTok…</section>
             </blockquote>
