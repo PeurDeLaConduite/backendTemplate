@@ -3,7 +3,6 @@ import React from "react";
 import VideoEmbed from "./VideoEmbed";
 import { Post, Author } from "@src/types/blog";
 
-
 type PostContentProps = {
     post: Post & { content: string };
     author: Author;
@@ -12,7 +11,6 @@ type PostContentProps = {
 const PostContent: React.FC<PostContentProps> = ({ post, author }) => (
     <>
         {/* ↩ Lien de retour : pas de onClick, c'est du Server Component */}
-
 
         <article className="prose lg:prose-xl mx-auto py-8">
             <h1>{post.title}</h1>
@@ -25,9 +23,7 @@ const PostContent: React.FC<PostContentProps> = ({ post, author }) => (
                 })}
             </div>
 
-            {post.videoUrl && (
-                <VideoEmbed youtubeUrl={post.videoUrl} title={`Vidéo de ${post.title}`} />
-            )}
+            {post.videoUrl && <VideoEmbed url={post.videoUrl} title={post.title} />}
 
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>

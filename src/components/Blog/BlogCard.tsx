@@ -30,7 +30,9 @@ export default function BlogCard({ post, author }: Props) {
             {/* 🧩 Contenu central */}
             {post.videoUrl && (
                 <div className="mt-4 aspect-video rounded-lg overflow-hidden">
-                    <VideoEmbed youtubeUrl={post.videoUrl} title={`Vidéo de ${post.title}`} />
+                    {post.videoUrl && (
+                        <VideoEmbed url={post.videoUrl} title={`Vidéo de ${post.title}`} />
+                    )}
                 </div>
             )}
 
