@@ -2,36 +2,30 @@
 import React from "react";
 import VideoEmbed from "./VideoEmbed";
 import { Post, Author } from "@src/types/blog";
+import MarkdownRenderer from "./MarkdownRenderer";
 
-
-type PostContentProps = {
-    post: Post & { content: string };
+interface PostContentProps {
+    post: Post & { content: string }; // Markdown content
     author: Author;
-};
+}
 
 const PostContent: React.FC<PostContentProps> = ({ post, author }) => (
-    <>
-        {/* ↩ Lien de retour : pas de onClick, c'est du Server Component */}
+    <article className="mx-auto max-w-3xl py-8">
+        <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
+        <div className="text-sm text-gray-500 mb-6">
+            Par {author.name} ·{" "}
+            {new Date(post.createdAt).toLocaleDateString("fr-FR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            })}
+        </div>
 
+        {post.videoUrl && <VideoEmbed url={post.videoUrl} title={`Vidéo de ${post.title}`} />}
 
-        <article className="prose lg:prose-xl mx-auto py-8">
-            <h1>{post.title}</h1>
-            <div className="text-sm text-gray-500 mb-6">
-                Par {author.name} ·{" "}
-                {new Date(post.createdAt).toLocaleDateString("fr-FR", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                })}
-            </div>
-
-            {post.videoUrl && (
-                <VideoEmbed url={post.videoUrl} title={`Vidéo de ${post.title}`} />
-            )}
-
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        </article>
-    </>
+        {/* Rendu du Markdown via ReactMarkdown */}
+        <MarkdownRenderer>{post.content}</MarkdownRenderer>
+    </article>
 );
 
 export default PostContent;

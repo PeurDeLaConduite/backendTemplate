@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+/* dans globals.css ou un module CSS importé */
+.markdown-container {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.markdown-container h1,
+.markdown-container h2,
+.markdown-container h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.markdown-container h1 {
+    font-size: 2em;
+}
+.markdown-container h2 {
+    font-size: 1.75em;
+}
+.markdown-container h3 {
+    font-size: 1.5em;
+}
+
+.markdown-container p {
+    margin-bottom: 1em;
+}
+
+.markdown-container ul,
+.markdown-container ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.markdown-container blockquote {
+    border-left: 4px solid #ccc;
+    padding-left: 1em;
+    color: #666;
+    margin: 1em 0;
+}
+
+.markdown-container ul {
+    list-style-type: disc; /* puces rondes */
+    list-style-position: inside; /* puce à l’intérieur du bloc */
+    margin-left: 1.5em; /* décalage à gauche */
+    padding-left: 0;
+}
+
+.markdown-container ol {
+    list-style-type: decimal; /* numéros 1., 2., 3. */
+    list-style-position: inside; /* numéro à l’intérieur du bloc */
+    margin-left: 1.5em;
+    padding-left: 0;
+}
+
+.markdown-container li {
+    margin-bottom: 0.5em; /* espacement entre items */
+}
+.markdown-container ol li::marker {
+    font-weight: bold;
+}
