@@ -15,41 +15,39 @@ const SERVICES = [
 // Génération du prompt amélioré
 function makePrompt(textSource) {
     return `
-  Tu es un rédacteur expert en blogging pédagogique sur la conduite et la gestion du stress au volant.
-  Intègre, sans jamais les énumérer, les services suivants :
-  ${SERVICES.map((s) => `- ${s}`).join("\\n")}
-  
-  À partir du texte source ci-dessous, renvoie **uniquement** un objet JSON valide ayant les clés :
-  
-  - **title**   : titre accrocheur  
-  - **excerpt** : phrase d’accroche (≤ 150 caractères)  
-  - **content** : corps de l’article au format Markdown avec **cinq** sections. Pour chaque section :  
-    - un titre de niveau 2 vraiment personnalisé ; il **ne doit contenir** aucun des mots suivants : « Introduction », « Causes », « Conseils », « Conclusion ».  
-      *Exemple :* \`## Des premiers tours de roue en toute sérénité\`  
-    - immédiatement après, un paragraphe de 2 à 3 phrases qui développe l’idée.  
-  - **tags**    : tableau de mots-clés  
-  - **seo**     :  
-    - **title**       (≤ 60 caractères)  
-    - **description** (≤ 155 caractères)
-  
-  **Ordre sémantique à suivre dans _content_** :  
-  1. Introduction rassurante  
-  2. Causes traumatiques  
-  3. Causes techniques  
-  4. Conseils pratiques  
-  5. Conclusion motivante  
-  
-  **Contraintes supplémentaires** :  
-  - Le champ **content** commence par la première section renommée avec son titre personnalisé.  
-  - N’ajoute aucun texte, balise ou console.log en dehors de l’objet JSON.  
-  - Optimise naturellement pour : « peur de la conduite » et « progresser au volant ».  
-  - Le JSON retourné doit être strictement valide (guillemets doubles, pas de virgule finale).
-  
-  **Texte source**  
+Tu es un rédacteur expert en blogging pédagogique sur la conduite et la gestion du stress au volant.  
+Intègre dans ton article, sans les énumérer, les services suivants :
+${SERVICES.map((s) => `- ${s}`).join("\n")}
+
+À partir du texte source ci-dessous, génère **uniquement** un objet JSON avec les clés suivantes :
+- **title** : titre accrocheur  
+- **excerpt** : phrase d’accroche (≤150 caractères)  
+- **content** : contenu au format Markdown, structuré en sections. Pour chaque section :
+  - un titre de niveau 2 personnalisé (ex : \`## Mes conseils pour surmonter vos craintes\`, pas \`## Introduction rassurante\`)
+  - un paragraphe de 2 à 3 phrases développant réellement l’idée  
+- **tags** : tableau de mots-clés  
+- **seo** :
+  - **title** : titre SEO (≤60 caractères)
+  - **description** : méta-description (≤155 caractères)
+
+**Sections et ordre** :
+1. Introduction rassurante  
+2. Causes traumatiques  
+3. Causes techniques  
+4. Conseils pratiques  
+5. Conclusion motivante  
+
+**Contraintes** :
+- Le champ **content** doit débuter par la section “Introduction rassurante” transformée en un titre personnalisé.  
+- Ne renvoie aucun texte hors du JSON et aucun bloc de code.  
+- Optimise pour les mots-clés : « peur de la conduite » et « progresser au volant ».
+**Ne renvoie que le JSON**, sans texte explicatif.
+
+**Texte source**  
 \`\`\`
-  ${textSource}
+${textSource}
 \`\`\`
-  `.trim();
+`.trim();
 }
 
 export default function PromptGenerator({ textSource, onGenerate, generatedPrompt, onCopyPrompt }) {

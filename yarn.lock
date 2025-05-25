@@ -142,7 +142,7 @@
     "@aws-amplify/plugin-types" "^1.10.1"
     "@aws-sdk/util-arn-parser" "^3.723.0"
 
-"@aws-amplify/auth@6.12.4":
+"@aws-amplify/auth@6.12.4", "@aws-amplify/auth@^6.12.4":
   version "6.12.4"
   resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-6.12.4.tgz#2e5ede3e585eb4b92813d0fd9a50308b809c1b37"
   integrity sha512-3qi3dKJUdYVDS3nCO2YeIK4Djj0vzDEjv2ZpfraYNVBUGXj4GnL7wSUm7r1VD3SYqnHgzoAIdW/73P5ormEMfw==
@@ -343,7 +343,7 @@
     change-case "^4.1.2"
     yup "^0.32.11"
 
-"@aws-amplify/core@6.11.4", "@aws-amplify/core@^6.7.2":
+"@aws-amplify/core@6.11.4", "@aws-amplify/core@^6.11.4":
   version "6.11.4"
   resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-6.11.4.tgz#957a8e8569ff68be8db12e8ff4fcfe05e5aeb9f0"
   integrity sha512-qkLyu3GxmJNH6gk9WwKEkOjQ0uUMyOuYqJgf97M6DV6btfoqBFY0T18wd+JEqjKm8awk4liRObU4b9/FQPuS9w==
@@ -13142,6 +13142,11 @@ react-dom@^19.0.0:
   integrity sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==
   dependencies:
     scheduler "^0.26.0"
+
+react-hook-form@7:
+  version "7.56.4"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.56.4.tgz#273f55d43fb24ace3e2b9409d0d5326306d7905e"
+  integrity sha512-Rob7Ftz2vyZ/ZGsQZPaRdIefkgOSrQSPXfqBdvOPwJfoGnjwRJUs7EM7Kc1mcoDv3NOtqBzPGbcMB8CGn9CKgw==
 
 react-hook-form@^7.53.2:
   version "7.56.3"

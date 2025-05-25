@@ -5,7 +5,7 @@ import React from "react";
 import EditableField from "./components/EditableField";
 import FormActionButtons from "./FormActionButtons";
 import useEditableForm from "@hooks/useEditableForm";
-
+import EditableTextArea from "./components/EditableTextArea";
 export default function AuthorsForm({ authors, setAuthors }) {
     const initialForm = {
         id: "",
@@ -46,7 +46,7 @@ export default function AuthorsForm({ authors, setAuthors }) {
                     readOnly={false}
                 />
 
-                <EditableField
+                <EditableTextArea
                     name="bio"
                     label="Bio"
                     value={form.bio}

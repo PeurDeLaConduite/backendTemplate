@@ -70,11 +70,13 @@ export default function PostsForm({ posts, setPosts, sections, setSections, auth
             <h2 className="text-xl font-semibold mb-4">Création d’un nouvel article</h2>
 
             {/* Wizard vidéo → IA → JSON → remplissage automatique des champs */}
-            <ArticleCreationForm
-                form={form}
-                handleChange={handleChange}
-                onParseResponse={handleParseResponse}
-            />
+            {editingIndex === null && (
+                <ArticleCreationForm
+                    form={form}
+                    handleChange={handleChange}
+                    onParseResponse={handleParseResponse}
+                />
+            )}
 
             {/* Une fois que tout est généré, on affiche le reste du formulaire */}
             <form onSubmit={(e) => e.preventDefault()} className="grid gap-2">

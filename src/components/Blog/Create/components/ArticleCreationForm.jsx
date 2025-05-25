@@ -21,12 +21,10 @@ export default function ArticleCreationForm({ form, handleChange, onParseRespons
 
     return (
         <div className="mx-auto mb-8 bg-white rounded-2xl shadow p-6">
-            <h2 className="text-2xl font-bold mb-6 text-blue-900">
-                Création d’un nouvel article vidéo
-            </h2>
+            <h2 className="text-2xl font-bold mb-6 text-blue-900">AI-Quick Article Generator</h2>
             <div className="mb-6 space-y-1">
                 <Step number={1} done={hasUrl}>
-                    Collez l’URL de la vidéo (YouTube ou TikTok)
+                    Collez l’URL de la vidéo (YouTube)
                 </Step>
                 <Step number={2} done={hasDownloaded}>
                     Téléchargez les sous-titres

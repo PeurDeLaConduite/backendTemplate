@@ -82,16 +82,15 @@ export default function CreateBlog() {
 
     return (
         <div className="p-6 max-w-5xl mx-auto space-y-6">
-            <h1 className="text-2xl font-bold">Éditeur de contenu du blog</h1>
+            <h1 className="text-2xl font-bold">Éditeur de contenu du blog</h1>{" "}
+            <PostsForm posts={posts} setPosts={setPosts} sections={sections} authors={authors} />
             <SectionsForm
                 sections={sections}
                 setSections={setSections}
                 posts={posts} // 👈 bien transmettre les posts ici
                 setPosts={setPosts} // 👈 ainsi que setPosts
             />
-            <PostsForm posts={posts} setPosts={setPosts} sections={sections} authors={authors} />
             <AuthorsForm authors={authors} setAuthors={setAuthors} />
-
             <div className="flex flex-col items-start gap-4">
                 <button
                     onClick={handleUploadJSON}
