@@ -10,6 +10,7 @@ export default function AuthorsForm({ authors, setAuthors }) {
     const initialForm = {
         id: "",
         name: "",
+        avatar: "",
         bio: "",
         email: "",
     };
@@ -45,7 +46,13 @@ export default function AuthorsForm({ authors, setAuthors }) {
                     onChange={handleChange}
                     readOnly={false}
                 />
-
+                <EditableField
+                    name="avatar"
+                    label="Avatar Url"
+                    value={form.avatar}
+                    onChange={handleChange}
+                    readOnly={false}
+                />
                 <EditableTextArea
                     name="bio"
                     label="Bio"
