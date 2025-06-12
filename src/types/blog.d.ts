@@ -1,7 +1,7 @@
 export interface Author {
     id: string;
     name: string;
-    // autres champs si nécessaire
+    avatar: string;
 }
 
 export interface Post {
