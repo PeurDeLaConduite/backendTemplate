@@ -179,4 +179,3 @@ export const data = defineData({
 
 ---
 
-> Ces instructions seront automatiquement suivies par Codex pour chaque tâche (lint, build, PR, etc.), garantissant un workflow cohérent et reproductible.
