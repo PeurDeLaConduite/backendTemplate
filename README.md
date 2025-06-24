@@ -31,6 +31,13 @@ aws sts get-caller-identity --profile amplify-admin | Out-Host
 
 npx ampx sandbox --profile amplify-admin
 ```
+
+
+## Setup
+
+1. Run `yarn install`.
+2. Execute `scripts/generate-amplify-outputs.sh` (or run `amplify backend output > amplify_outputs.json`).
+3. Run `yarn build` for production.
 ```
 MODEL de amplify_outputs.json
 

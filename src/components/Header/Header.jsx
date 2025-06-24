@@ -30,12 +30,12 @@ const Header = () => {
                     <Link href="/blog" className="text-gray-700 hover:text-blue-600">
                         Blog
                     </Link>
-                    <Link
+                    {/* <Link
                         href="/informations-legales"
                         className="text-gray-700 hover:text-blue-600"
                     >
                         Informations légales
-                    </Link>
+                    </Link> */}
                 </div>
 
                 <div className="flex items-center gap-4">

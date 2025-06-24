@@ -39,7 +39,9 @@
         "src/**/*.ts",
         "src/**/*.tsx",
         "public/**/*.json",
-        ".next/types/**/*.ts"
-, "src/components/Blog/Create/components/EditableField.jsx", "src/hooks/useEditableForm.js"    ],
+        ".next/types/**/*.ts",
+        "src/components/Blog/Create/components/EditableField.jsx",
+        "src/hooks/useEditableForm.js"
+, "src/components/Blog/Create/components/ArticleEditForm.jsx"    ],
     "exclude": ["node_modules", "amplify"]
 }
